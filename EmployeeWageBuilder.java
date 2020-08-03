@@ -1,9 +1,9 @@
-interface EmployeeMonthWage
+interface EmployeeWage
 {
 	 void dailyWage();
 }
 
-class wageCal implements EmployeeMonthWage
+class wageCal implements EmployeeWage
 {
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
@@ -16,6 +16,19 @@ class wageCal implements EmployeeMonthWage
 	int totalWorkingDay=0;
 	int totalWorkingHrs=0;
 
+	public void wageComputation()
+	{
+		empWage = empHrs * empRatePerHrs ;
+		totalWage += empWage;
+		totalWorkingHrs += empHrs;
+		System.out.println("Employee's day "+ totalWorkingDay +" Wage is : " + empWage);
+	}
+
+	public void displayTotalWage()
+	{
+		System.out.println("Total working Hours in month : " + totalWorkingHrs);		
+   		System.out.println("Total Monthly wages is :" + totalWage);
+	}
 	public void dailyWage()
 	{
 		while ( totalWorkingDay < numOfWorkingDays && totalWorkingHrs < totalHrsInMonth )
@@ -38,15 +51,10 @@ class wageCal implements EmployeeMonthWage
 					System.out.println("Employee is Absent");
 					empHrs = 0;
 			}
-
-			empWage = empHrs * empRatePerHrs ;
-			totalWage += empWage;
-			totalWorkingHrs += empHrs;
-			System.out.println("Employee's day "+ totalWorkingDay +" Wage is : " + empWage);
+			wageComputation();
 		}
-		System.out.println("Total working Hours in month : " + totalWorkingHrs);		
-   		System.out.println("Total Monthly wages is :" + totalWage);
-   	}	
+		displayTotalWage();
+	}	
 }
 
 class EmployeeWageBuilder
