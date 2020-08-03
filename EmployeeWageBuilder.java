@@ -9,14 +9,18 @@ class wageCal implements EmployeeMonthWage
 	public static final int isPartTime=2;
 	public static final int empRatePerHrs=20;
 	public static final int numOfWorkingDays=20;
+	public static final int totalHrsInMonth=100;
 	int empHrs=0;
 	int empWage=0;
 	int totalWage=0;
+	int totalWorkingDay=0;
+	int totalWorkingHrs=0;
 
 	public void dailyWage()
 	{
-		for (int day=1; day<=numOfWorkingDays; day++)
+		while ( totalWorkingDay < numOfWorkingDays && totalWorkingHrs < totalHrsInMonth )
 		{
+			totalWorkingDay++;
 			int empCheck = (int) Math.floor(Math.random()*10) % 3;
 			switch (empCheck)
 			{
@@ -37,8 +41,10 @@ class wageCal implements EmployeeMonthWage
 
 			empWage = empHrs * empRatePerHrs ;
 			totalWage += empWage;
-			System.out.println("Employee's day "+ day +" Wage is : " + empWage);
-		}		
+			totalWorkingHrs += empHrs;
+			System.out.println("Employee's day "+ totalWorkingDay +" Wage is : " + empWage);
+		}
+		System.out.println("Total working Hours in month : " + totalWorkingHrs);		
    		System.out.println("Total Monthly wages is :" + totalWage);
    	}	
 }
