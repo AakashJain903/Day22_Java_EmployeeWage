@@ -1,34 +1,35 @@
-interface PartTimeEmp
+interface EmployeeWage
 {
 	 void dailyWage();
 }
 
-class wageCal implements PartTimeEmp
+class wageCal implements EmployeeWage
 {
-	static final int isFullTime=1;
-	static final int isPartTime=2;
-	static final int empRatePerHrs=20;
+	public static final int isFullTime=1;
+	public static final int isPartTime=2;
+	public static final int empRatePerHrs=20;
 	int empHrs=0;
 	int empWage=0;
 
-	double empCheck = Math.floor(Math.random()*10)%3;
+	int empCheck = (int) Math.floor(Math.random()*10)%3;
 	
 	public void dailyWage()
 	{
-		if (empCheck == isFullTime)
+		switch (empCheck)
 		{
-			System.out.println("Employee is full time");
-			empHrs=12;
-		}
-		else if (empCheck == isPartTime) 
-		{
-			System.out.println("Employee is part time");
-			empHrs=8;
-		}
-		else
-		{
-			System.out.println("Employee is Absent");		
-			empHrs=0;
+			case isFullTime :
+				System.out.println("Employee is full time working");
+				empHrs = 8;
+				break;
+
+			case isPartTime :
+				System.out.println("Employee is part time working");
+				empHrs = 4;
+				break;
+
+			default :
+				System.out.println("Employee is Absent");
+				empHrs = 0;
 		}
 
 		empWage = empHrs * empRatePerHrs;
