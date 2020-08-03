@@ -1,13 +1,14 @@
 interface EmployeeWage
 {
-	 void dailyWage();
+	public void wageComputation(int empRatePerHrs);
+	public void displayTotalWage(String company);
+	public void dailyWage(String company, int empRatePerHrs);
 }
 
 class wageCal implements EmployeeWage
 {
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
-	public static final int empRatePerHrs=20;
 	public static final int numOfWorkingDays=20;
 	public static final int totalHrsInMonth=100;
 	int empHrs=0;
@@ -16,20 +17,21 @@ class wageCal implements EmployeeWage
 	int totalWorkingDay=0;
 	int totalWorkingHrs=0;
 
-	public void wageComputation()
+	public void wageComputation(int empRatePerHrs)
 	{
 		empWage = empHrs * empRatePerHrs ;
 		totalWage += empWage;
 		totalWorkingHrs += empHrs;
-		System.out.println("Employee's day "+ totalWorkingDay +" Wage is : " + empWage);
+		//System.out.println("Employee's day "+ totalWorkingDay +" Wage is : " + empWage);
 	}
 
-	public void displayTotalWage()
+	public void displayTotalWage(String company)
 	{
+		System.out.println("Wage Calculation for :" + company);
 		System.out.println("Total working Hours in month : " + totalWorkingHrs);		
    		System.out.println("Total Monthly wages is :" + totalWage);
 	}
-	public void dailyWage()
+	public void dailyWage(String company, int empRatePerHrs)
 	{
 		while ( totalWorkingDay < numOfWorkingDays && totalWorkingHrs < totalHrsInMonth )
 		{
@@ -38,22 +40,19 @@ class wageCal implements EmployeeWage
 			switch (empCheck)
 			{
 				case isFullTime :
-					System.out.println("Employee is full time working");
 					empHrs = 8;
 					break;
 
 				case isPartTime :
-					System.out.println("Employee is part time working");
 					empHrs = 4;
 					break;
 
 				default :
-					System.out.println("Employee is Absent");
 					empHrs = 0;
 			}
-			wageComputation();
+			wageComputation(empRatePerHrs);
 		}
-		displayTotalWage();
+		displayTotalWage(company);
 	}	
 }
 
@@ -61,7 +60,9 @@ class EmployeeWageBuilder
 {
 	public static void main(String arg[])
 	{
-		wageCal wage = new wageCal();
-		wage.dailyWage();
+		wageCal wage1 = new wageCal();
+		wageCal wage2 = new wageCal();
+		wage1.dailyWage("Reliance Fresh",20);
+		wage2.dailyWage("Dmart",20);
 	}
 }
